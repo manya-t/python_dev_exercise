@@ -13,7 +13,7 @@ def search():
     if request.method == 'POST':
         firstName = request.form['firstName']
         fullData = pandas.read_csv(DATA_PATH)
-        data = fullData[fullData['PatientFirstName'] == firstName]
+        data = fullData[fullData['PatientFirstName'].str.lower() == firstName.lower()]
         data = data.drop_duplicates(subset=['PatientID', 'MostRecentTestDate', 'TestName'])
         data_html = data.to_html(classes="table col-sm-10") if data.size > 0 else "No results found for that name."
         
