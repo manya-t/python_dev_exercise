@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lab Results Finder: Search</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1>Lab Results Finder: Search</h1>
+        <form class="col-sm-8" method="POST">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="firstName">First Name</label>
+                <input class="form-control col-sm-6" type="text" id="firstName" name="firstName" placeholder="First name of patient">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+        <br>
+        {% if firstName  %}
+            <h2>Results for {{firstName}}:</h2>
+            <div>{{data_html | safe}}</div>
+        {% endif %}
+    </body>
+</html>
