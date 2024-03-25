@@ -5,18 +5,36 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>
     <body>
-        <h1>Lab Results Finder: Search</h1>
-        <form class="col-sm-8" method="POST">
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="firstName">First Name</label>
-                <input class="form-control col-sm-6" type="text" id="firstName" name="firstName" placeholder="First name of patient">
-            </div>
-            <input type="submit" class="btn btn-primary" value="Submit">
-        </form>
-        <br>
-        {% if firstName  %}
-            <h2>Results for {{firstName}}:</h2>
+        <div class="container">
+            <h1>Lab Results Finder: Search</h1>
+            <form class="col-sm-8" method="POST">
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label" for="name">Patient Name</label>
+                    <input class="form-control col-sm-6" type="text" id="name" name="name" placeholder="Patient name">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
+            <br>
+            {% if searchQuery  %}
+                <h2>Results for {{searchQuery}}:</h2>
+            {% else %}
+                <h2>All Patients</h2>
+            {% endif %}
+            <table class="table col-sm-10">
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                </tr>
+                {% for row in patients.itertuples() %}
+                    <tr>
+                        <td>{{row.PatientID}}</td>
+                        <td><a href="/tests/{{row.PatientID}}">{{row.fullname}}</a></td>
+                        <td>{{row.Gender}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
             <div>{{data_html | safe}}</div>
-        {% endif %}
+        </div>
     </body>
 </html>
